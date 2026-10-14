@@ -1,0 +1,10 @@
+{
+	"InstallScripts" : 
+	[
+		"C:/A_Manthan/C++/OpenGL-2/Project1/build/cmake_install.cmake",
+		"C:/A_Manthan/C++/OpenGL-2/Project1/build/libs/glfw/cmake_install.cmake",
+		"C:/A_Manthan/C++/OpenGL-2/Project1/build/libs/glfw/src/cmake_install.cmake",
+		"C:/A_Manthan/C++/OpenGL-2/Project1/build/libs/glfw/docs/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

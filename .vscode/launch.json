@@ -1,0 +1,15 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Custom Debug (Project1)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/Project1.exe",
+            "cwd": "${workspaceFolder}/src",
+            "MIMode": "gdb",
+            "miDebuggerPath": "C:\\mingw64\\bin\\gdb.exe",
+            "preLaunchTask": "CMake: build"
+        }
+    ]
+}

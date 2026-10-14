@@ -1,0 +1,43 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "cmake",
+            "label": "CMake: build",
+            "command": "build",
+            "targets": [
+                "Project1"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Run Project1",
+            "type": "shell",
+            "dependsOn": "CMake: build",
+            "command": "${workspaceFolder}\\build\\Project1.exe",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": []
+        },
+        {
+            "type": "cmake",
+            "label": "CMake: clean",
+            "command": "clean",
+            "problemMatcher": []
+        },
+        {
+            "label": "CMake: clean rebuild",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "CMake: clean",
+                "CMake: build"
+            ],
+            "problemMatcher": []
+        }
+    ]
+}
