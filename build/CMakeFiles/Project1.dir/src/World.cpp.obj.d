@@ -134,7 +134,10 @@ CMakeFiles/Project1.dir/src/World.cpp.obj: \
  C:/mingw64/include/c++/16.2.0/cerrno \
  C:/mingw64/include/c++/16.2.0/bits/charconv.h \
  C:/mingw64/include/c++/16.2.0/bits/basic_string.tcc \
- C:/mingw64/include/c++/16.2.0/array C:/mingw64/include/c++/16.2.0/cmath \
+ C:/mingw64/include/c++/16.2.0/array \
+ C:/A_Manthan/C++/OpenGL-2/Project1/libs/glm/glm/glm.hpp \
+ C:/A_Manthan/C++/OpenGL-2/Project1/libs/glm/glm/detail/_fixes.hpp \
+ C:/mingw64/include/c++/16.2.0/cmath \
  C:/mingw64/x86_64-w64-mingw32/include/math.h \
  C:/mingw64/include/c++/16.2.0/bits/specfun.h \
  C:/mingw64/include/c++/16.2.0/tr1/gamma.tcc \
@@ -149,89 +152,6 @@ CMakeFiles/Project1.dir/src/World.cpp.obj: \
  C:/mingw64/include/c++/16.2.0/tr1/poly_hermite.tcc \
  C:/mingw64/include/c++/16.2.0/tr1/poly_laguerre.tcc \
  C:/mingw64/include/c++/16.2.0/tr1/riemann_zeta.tcc \
- C:\A_Manthan\C++\OpenGL-2\Project1\src\headers/FastNoiseLite.h \
- C:/mingw64/include/c++/16.2.0/utility \
- C:/mingw64/include/c++/16.2.0/bits/stl_relops.h \
- C:/mingw64/include/c++/16.2.0/bits/intcmp.h \
- C:/mingw64/include/c++/16.2.0/memory \
- C:/mingw64/include/c++/16.2.0/bits/stl_tempbuf.h \
- C:/mingw64/include/c++/16.2.0/bits/stl_raw_storage_iter.h \
- C:/mingw64/include/c++/16.2.0/bits/align.h \
- C:/mingw64/include/c++/16.2.0/bits/unique_ptr.h \
- C:/mingw64/include/c++/16.2.0/bits/ostream.h \
- C:/mingw64/include/c++/16.2.0/ios \
- C:/mingw64/include/c++/16.2.0/exception \
- C:/mingw64/include/c++/16.2.0/bits/exception_ptr.h \
- C:/mingw64/include/c++/16.2.0/bits/cxxabi_init_exception.h \
- C:/mingw64/include/c++/16.2.0/typeinfo \
- C:/mingw64/include/c++/16.2.0/bits/nested_exception.h \
- C:/mingw64/include/c++/16.2.0/bits/ios_base.h \
- C:/mingw64/include/c++/16.2.0/ext/atomicity.h \
- C:/mingw64/include/c++/16.2.0/x86_64-w64-mingw32/bits/gthr.h \
- C:/mingw64/include/c++/16.2.0/x86_64-w64-mingw32/bits/gthr-default.h \
- C:/mingw64/x86_64-w64-mingw32/include/pthread.h \
- C:/mingw64/x86_64-w64-mingw32/include/sys/types.h \
- C:/mingw64/x86_64-w64-mingw32/include/process.h \
- C:/mingw64/x86_64-w64-mingw32/include/corecrt_startup.h \
- C:/mingw64/x86_64-w64-mingw32/include/signal.h \
- C:/mingw64/x86_64-w64-mingw32/include/pthread_signal.h \
- C:/mingw64/x86_64-w64-mingw32/include/time.h \
- C:/mingw64/x86_64-w64-mingw32/include/sys/timeb.h \
- C:/mingw64/x86_64-w64-mingw32/include/sec_api/sys/timeb_s.h \
- C:/mingw64/x86_64-w64-mingw32/include/_timeval.h \
- C:/mingw64/x86_64-w64-mingw32/include/pthread_time.h \
- C:/mingw64/x86_64-w64-mingw32/include/pthread_compat.h \
- C:/mingw64/x86_64-w64-mingw32/include/sched.h \
- C:/mingw64/x86_64-w64-mingw32/include/pthread_unistd.h \
- C:/mingw64/include/c++/16.2.0/x86_64-w64-mingw32/bits/atomic_word.h \
- C:/mingw64/include/c++/16.2.0/bits/locale_classes.h \
- C:/mingw64/include/c++/16.2.0/bits/functexcept.h \
- C:/mingw64/include/c++/16.2.0/bits/locale_classes.tcc \
- C:/mingw64/include/c++/16.2.0/system_error \
- C:/mingw64/include/c++/16.2.0/x86_64-w64-mingw32/bits/error_constants.h \
- C:/mingw64/include/c++/16.2.0/stdexcept \
- C:/mingw64/include/c++/16.2.0/bits/stdexcept_except.h \
- C:/mingw64/include/c++/16.2.0/streambuf \
- C:/mingw64/include/c++/16.2.0/bits/streambuf.tcc \
- C:/mingw64/include/c++/16.2.0/bits/basic_ios.h \
- C:/mingw64/include/c++/16.2.0/bits/locale_facets.h \
- C:/mingw64/include/c++/16.2.0/cwctype \
- C:/mingw64/x86_64-w64-mingw32/include/wctype.h \
- C:/mingw64/include/c++/16.2.0/x86_64-w64-mingw32/bits/ctype_base.h \
- C:/mingw64/include/c++/16.2.0/bits/streambuf_iterator.h \
- C:/mingw64/include/c++/16.2.0/x86_64-w64-mingw32/bits/ctype_inline.h \
- C:/mingw64/include/c++/16.2.0/bits/locale_facets.tcc \
- C:/mingw64/include/c++/16.2.0/bits/basic_ios.tcc \
- C:/mingw64/include/c++/16.2.0/bits/shared_ptr.h \
- C:/mingw64/include/c++/16.2.0/bits/shared_ptr_base.h \
- C:/mingw64/include/c++/16.2.0/bits/allocated_ptr.h \
- C:/mingw64/include/c++/16.2.0/bits/refwrap.h \
- C:/mingw64/include/c++/16.2.0/ext/concurrence.h \
- C:/mingw64/include/c++/16.2.0/bits/shared_ptr_atomic.h \
- C:/mingw64/include/c++/16.2.0/bits/atomic_base.h \
- C:/mingw64/include/c++/16.2.0/bits/atomic_lockfree_defines.h \
- C:/mingw64/include/c++/16.2.0/bits/atomic_wait.h \
- C:/mingw64/include/c++/16.2.0/backward/auto_ptr.h \
- C:/mingw64/include/c++/16.2.0/bits/ranges_uninitialized.h \
- C:/mingw64/include/c++/16.2.0/bits/ranges_algobase.h \
- C:/mingw64/include/c++/16.2.0/pstl/glue_memory_defs.h \
- C:/mingw64/include/c++/16.2.0/pstl/execution_defs.h \
- C:\A_Manthan\C++\OpenGL-2\Project1\src\headers/ShaderClass.h \
- C:/mingw64/include/c++/16.2.0/fstream \
- C:/mingw64/include/c++/16.2.0/istream \
- C:/mingw64/include/c++/16.2.0/ostream \
- C:/mingw64/include/c++/16.2.0/bits/ostream_print.h \
- C:/mingw64/include/c++/16.2.0/bits/ostream.tcc \
- C:/mingw64/include/c++/16.2.0/bits/istream.tcc \
- C:/mingw64/include/c++/16.2.0/bits/codecvt.h \
- C:/mingw64/include/c++/16.2.0/x86_64-w64-mingw32/bits/basic_file.h \
- C:/mingw64/include/c++/16.2.0/x86_64-w64-mingw32/bits/c++io.h \
- C:/mingw64/include/c++/16.2.0/bits/fstream.tcc \
- C:/mingw64/include/c++/16.2.0/sstream \
- C:/mingw64/include/c++/16.2.0/bits/sstream.tcc \
- C:/mingw64/include/c++/16.2.0/iostream \
- C:/A_Manthan/C++/OpenGL-2/Project1/libs/glm/glm/glm.hpp \
- C:/A_Manthan/C++/OpenGL-2/Project1/libs/glm/glm/detail/_fixes.hpp \
  C:/A_Manthan/C++/OpenGL-2/Project1/libs/glm/glm/detail/setup.hpp \
  C:/mingw64/include/c++/16.2.0/cassert \
  C:/mingw64/x86_64-w64-mingw32/include/assert.h \
@@ -267,7 +187,10 @@ CMakeFiles/Project1.dir/src/World.cpp.obj: \
  C:/A_Manthan/C++/OpenGL-2/Project1/libs/glm/glm/detail/type_vec3.inl \
  C:/A_Manthan/C++/OpenGL-2/Project1/libs/glm/glm/detail/compute_vector_decl.hpp \
  C:/mingw64/include/c++/16.2.0/functional \
+ C:/mingw64/include/c++/16.2.0/bits/refwrap.h \
  C:/mingw64/include/c++/16.2.0/bits/std_function.h \
+ C:/mingw64/include/c++/16.2.0/typeinfo \
+ C:/mingw64/include/c++/16.2.0/bits/functexcept.h \
  C:/mingw64/include/c++/16.2.0/unordered_map \
  C:/mingw64/include/c++/16.2.0/bits/unordered_map.h \
  C:/mingw64/include/c++/16.2.0/bits/hashtable.h \
@@ -381,6 +304,85 @@ CMakeFiles/Project1.dir/src/World.cpp.obj: \
  C:/A_Manthan/C++/OpenGL-2/Project1/libs/glm/glm/detail/type_half.inl \
  C:/A_Manthan/C++/OpenGL-2/Project1/libs/glm/glm/integer.hpp \
  C:/A_Manthan/C++/OpenGL-2/Project1/libs/glm/glm/detail/func_integer.inl \
+ C:/mingw64/include/c++/16.2.0/optional \
+ C:/mingw64/include/c++/16.2.0/exception \
+ C:/mingw64/include/c++/16.2.0/bits/exception_ptr.h \
+ C:/mingw64/include/c++/16.2.0/bits/cxxabi_init_exception.h \
+ C:/mingw64/include/c++/16.2.0/bits/nested_exception.h \
+ C:\A_Manthan\C++\OpenGL-2\Project1\src\headers/FastNoiseLite.h \
+ C:/mingw64/include/c++/16.2.0/utility \
+ C:/mingw64/include/c++/16.2.0/bits/stl_relops.h \
+ C:/mingw64/include/c++/16.2.0/bits/intcmp.h \
+ C:/mingw64/include/c++/16.2.0/memory \
+ C:/mingw64/include/c++/16.2.0/bits/stl_tempbuf.h \
+ C:/mingw64/include/c++/16.2.0/bits/stl_raw_storage_iter.h \
+ C:/mingw64/include/c++/16.2.0/bits/align.h \
+ C:/mingw64/include/c++/16.2.0/bits/unique_ptr.h \
+ C:/mingw64/include/c++/16.2.0/bits/ostream.h \
+ C:/mingw64/include/c++/16.2.0/ios \
+ C:/mingw64/include/c++/16.2.0/bits/ios_base.h \
+ C:/mingw64/include/c++/16.2.0/ext/atomicity.h \
+ C:/mingw64/include/c++/16.2.0/x86_64-w64-mingw32/bits/gthr.h \
+ C:/mingw64/include/c++/16.2.0/x86_64-w64-mingw32/bits/gthr-default.h \
+ C:/mingw64/x86_64-w64-mingw32/include/pthread.h \
+ C:/mingw64/x86_64-w64-mingw32/include/sys/types.h \
+ C:/mingw64/x86_64-w64-mingw32/include/process.h \
+ C:/mingw64/x86_64-w64-mingw32/include/corecrt_startup.h \
+ C:/mingw64/x86_64-w64-mingw32/include/signal.h \
+ C:/mingw64/x86_64-w64-mingw32/include/pthread_signal.h \
+ C:/mingw64/x86_64-w64-mingw32/include/time.h \
+ C:/mingw64/x86_64-w64-mingw32/include/sys/timeb.h \
+ C:/mingw64/x86_64-w64-mingw32/include/sec_api/sys/timeb_s.h \
+ C:/mingw64/x86_64-w64-mingw32/include/_timeval.h \
+ C:/mingw64/x86_64-w64-mingw32/include/pthread_time.h \
+ C:/mingw64/x86_64-w64-mingw32/include/pthread_compat.h \
+ C:/mingw64/x86_64-w64-mingw32/include/sched.h \
+ C:/mingw64/x86_64-w64-mingw32/include/pthread_unistd.h \
+ C:/mingw64/include/c++/16.2.0/x86_64-w64-mingw32/bits/atomic_word.h \
+ C:/mingw64/include/c++/16.2.0/bits/locale_classes.h \
+ C:/mingw64/include/c++/16.2.0/bits/locale_classes.tcc \
+ C:/mingw64/include/c++/16.2.0/system_error \
+ C:/mingw64/include/c++/16.2.0/x86_64-w64-mingw32/bits/error_constants.h \
+ C:/mingw64/include/c++/16.2.0/stdexcept \
+ C:/mingw64/include/c++/16.2.0/bits/stdexcept_except.h \
+ C:/mingw64/include/c++/16.2.0/streambuf \
+ C:/mingw64/include/c++/16.2.0/bits/streambuf.tcc \
+ C:/mingw64/include/c++/16.2.0/bits/basic_ios.h \
+ C:/mingw64/include/c++/16.2.0/bits/locale_facets.h \
+ C:/mingw64/include/c++/16.2.0/cwctype \
+ C:/mingw64/x86_64-w64-mingw32/include/wctype.h \
+ C:/mingw64/include/c++/16.2.0/x86_64-w64-mingw32/bits/ctype_base.h \
+ C:/mingw64/include/c++/16.2.0/bits/streambuf_iterator.h \
+ C:/mingw64/include/c++/16.2.0/x86_64-w64-mingw32/bits/ctype_inline.h \
+ C:/mingw64/include/c++/16.2.0/bits/locale_facets.tcc \
+ C:/mingw64/include/c++/16.2.0/bits/basic_ios.tcc \
+ C:/mingw64/include/c++/16.2.0/bits/shared_ptr.h \
+ C:/mingw64/include/c++/16.2.0/bits/shared_ptr_base.h \
+ C:/mingw64/include/c++/16.2.0/bits/allocated_ptr.h \
+ C:/mingw64/include/c++/16.2.0/ext/concurrence.h \
+ C:/mingw64/include/c++/16.2.0/bits/shared_ptr_atomic.h \
+ C:/mingw64/include/c++/16.2.0/bits/atomic_base.h \
+ C:/mingw64/include/c++/16.2.0/bits/atomic_lockfree_defines.h \
+ C:/mingw64/include/c++/16.2.0/bits/atomic_wait.h \
+ C:/mingw64/include/c++/16.2.0/backward/auto_ptr.h \
+ C:/mingw64/include/c++/16.2.0/bits/ranges_uninitialized.h \
+ C:/mingw64/include/c++/16.2.0/bits/ranges_algobase.h \
+ C:/mingw64/include/c++/16.2.0/pstl/glue_memory_defs.h \
+ C:/mingw64/include/c++/16.2.0/pstl/execution_defs.h \
+ C:\A_Manthan\C++\OpenGL-2\Project1\src\headers/ShaderClass.h \
+ C:/mingw64/include/c++/16.2.0/fstream \
+ C:/mingw64/include/c++/16.2.0/istream \
+ C:/mingw64/include/c++/16.2.0/ostream \
+ C:/mingw64/include/c++/16.2.0/bits/ostream_print.h \
+ C:/mingw64/include/c++/16.2.0/bits/ostream.tcc \
+ C:/mingw64/include/c++/16.2.0/bits/istream.tcc \
+ C:/mingw64/include/c++/16.2.0/bits/codecvt.h \
+ C:/mingw64/include/c++/16.2.0/x86_64-w64-mingw32/bits/basic_file.h \
+ C:/mingw64/include/c++/16.2.0/x86_64-w64-mingw32/bits/c++io.h \
+ C:/mingw64/include/c++/16.2.0/bits/fstream.tcc \
+ C:/mingw64/include/c++/16.2.0/sstream \
+ C:/mingw64/include/c++/16.2.0/bits/sstream.tcc \
+ C:/mingw64/include/c++/16.2.0/iostream \
  C:/A_Manthan/C++/OpenGL-2/Project1/libs/glm/glm/gtc/matrix_transform.hpp \
  C:/A_Manthan/C++/OpenGL-2/Project1/libs/glm/glm/ext/matrix_projection.hpp \
  C:/A_Manthan/C++/OpenGL-2/Project1/libs/glm/glm/gtc/constants.hpp \
@@ -449,4 +451,11 @@ CMakeFiles/Project1.dir/src/World.cpp.obj: \
  C:/A_Manthan/C++/OpenGL-2/Project1/libs/glm/glm/ext/scalar_common.inl \
  C:/A_Manthan/C++/OpenGL-2/Project1/libs/glm/glm/gtx/norm.inl \
  C:/A_Manthan/C++/OpenGL-2/Project1/libs/glm/glm/gtx/quaternion.inl \
- C:/A_Manthan/C++/OpenGL-2/Project1/libs/glm/glm/gtx/vector_angle.inl
+ C:/A_Manthan/C++/OpenGL-2/Project1/libs/glm/glm/gtx/vector_angle.inl \
+ C:/mingw64/include/c++/16.2.0/algorithm \
+ C:/mingw64/include/c++/16.2.0/bits/stl_algo.h \
+ C:/mingw64/include/c++/16.2.0/bits/algorithmfwd.h \
+ C:/mingw64/include/c++/16.2.0/bits/stl_heap.h \
+ C:/mingw64/include/c++/16.2.0/bits/uniform_int_dist.h \
+ C:/mingw64/include/c++/16.2.0/bits/ranges_algo.h \
+ C:/mingw64/include/c++/16.2.0/pstl/glue_algorithm_defs.h

@@ -8,10 +8,19 @@ using std::vector;
 using std::map;
 using std::string;
 using std::array;
+#include "glm/glm.hpp"
+#include <optional>
 
 
 enum class BlockType{
     dirt, air, grass
+};
+
+struct RaycastHit
+{
+    glm::ivec3 blockPosition;    
+    glm::ivec3 previousPosition; 
+    glm::ivec3 faceNormal;       
 };
 
 enum class Faces{

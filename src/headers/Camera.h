@@ -21,13 +21,32 @@ class Camera {
         bool firstClick = true;
 
 
-        float speed = 0.5;
-        float sensitivity = 100.0f;
+        glm::vec3 getCameraPos();
+        glm::vec3 getCameraDirection();
 
-        Camera(int width, int height, glm::vec3 position); 
+        float speed = 0.3f;
+        float sensitivity = 0.5f;
+
+        Camera(int width, int height, glm::vec3 position, GLFWwindow* window); 
         
         void Matrix(float FOVdeg, float nearPlane, float farPlane, ShaderProgram& shader, const char* uniform);
         void Inputs (GLFWwindow* window);
         float getPositionX();
         float getPositionZ();
+
+    private:
+        bool mouseCaptured = true;
+        bool cursorModeInitialized = false;
+        bool escapeWasDown = false;
+        bool toggleWasDown = false;
+        bool firstMouse = true;
+
+        double lastX = 0.0;
+        double lastY = 0.0;
+
+        static void MouseCallback(
+            GLFWwindow* window,
+            double xpos,
+            double ypos
+        );
 };

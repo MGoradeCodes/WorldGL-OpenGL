@@ -24,7 +24,8 @@ int main()
 {
     // GLFW
     glfwInit();
-
+    bool leftMouseWasDown = false;
+    bool rightMouseWasDown = false;
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -105,11 +106,11 @@ int main()
     World world;
 	Texture texture("textures/terrain.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
 	texture.texUnit(shaderProgram, "tex0", 0);
-
+    
 
     glEnable(GL_DEPTH_TEST);
 
-    Camera camera(800, 600, glm::vec3(0, 0, 2));
+    Camera camera(800, 600, glm::vec3(0, 0, 0), window);
     glfwSwapInterval(1);
 
     double prevTime = 0.0;
@@ -119,6 +120,7 @@ int main()
 
     glfwSwapInterval(1);
     setWindowIcon(window, "textures/grass.png");
+
 
     while (!glfwWindowShouldClose(window))
     {
@@ -130,13 +132,60 @@ int main()
         diff = currTime - prevTime;
 
         world.Update(cameraX, cameraZ);
+        bool leftMouseDown =
+             glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS;
 
+        bool rightMouseDown =
+            glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS;
+
+        // Detect a fresh click.
+        bool leftClicked = leftMouseDown && !leftMouseWasDown;
+        bool rightClicked = rightMouseDown && !rightMouseWasDown;
+
+        leftMouseWasDown = leftMouseDown;
+        rightMouseWasDown = rightMouseDown;
+
+        auto hit = world.Raycast(
+            camera.getCameraPos(),
+            camera.getCameraDirection(),
+            6.0f
+        );
+
+        if (hit)
+        {
+            if (leftClicked)
+            {
+                // Break the targeted block.
+                world.SetBlock(
+                    hit->blockPosition.x,
+                    hit->blockPosition.y,
+                    hit->blockPosition.z,
+                    BlockType::air
+                );
+            }
+
+            if (rightClicked)
+            {
+                // Place a grass block in the adjacent voxel.
+                glm::ivec3 placePos =
+                    hit->blockPosition + hit->faceNormal;
+
+                world.SetBlock(
+                    placePos.x,
+                    placePos.y,
+                    placePos.z,
+                    BlockType::grass
+                );
+            }
+        }
         ++counter;
 
         if (diff >= 1.0 / 30.0) {
             const float fps = (1.0f / diff) * static_cast<float>(counter);
             std::string fpsText = std::to_string(fps);
-            std::string newTitle = "Minecraft In Opengl - FPS : " + fpsText;
+            std::string newTitle = std::string("Minecraft In Opengl - FPS : ") + fpsText + 
+                                " X: " + std::to_string(cameraX) + 
+                                " Z: " + std::to_string(cameraZ);
             glfwSetWindowTitle(window, newTitle.c_str());
             prevTime = currTime;
             counter = 0;

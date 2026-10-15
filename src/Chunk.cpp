@@ -1,6 +1,8 @@
 #include "headers/Chunk.h"
 #include <cmath>
 
+
+//Constants 
 namespace
 {
     constexpr int   ATLAS_COLS = 4;           
@@ -8,24 +10,27 @@ namespace
     constexpr float TILE_W = 1.0f / ATLAS_COLS;
     constexpr float TILE_H = 1.0f / ATLAS_ROWS;
 }
-int GetTerrainHeight();
 
+//Chunk Constructor and initialise vars
 Chunk::Chunk(int ChunkX, int ChunkZ) : ChunkX(ChunkX) , ChunkZ(ChunkZ), blocks(SIZE * SIZE * SIZE, BlockType::air){
+    // Set Noise Func    
     terrainNoise.SetSeed(2000);
     terrainNoise.SetNoiseType(FastNoiseLite::NoiseType_OpenSimplex2);
     terrainNoise.SetFrequency(0.01f);
     terrainNoise.SetFractalType(FastNoiseLite::FractalType_Ridged);
 
-    for (int x = 0; x < SIZE; ++x)
+    // Loop for loading a chunk
+    for (int x = 0; x < SIZE; ++x) // Till SIZE(16)
     {   
-        for (int z = 0; z < SIZE; ++z)
+        for (int z = 0; z < SIZE; ++z) // Til SIZE(16)
         {   
-            int WorldX = ChunkX*SIZE+x;
-            int WorldZ = ChunkZ*SIZE+z;
-            int height = GetTerrainHeight(WorldX, WorldZ);
+            // Get world coodiantes for a local chunk
+            int WorldX = ChunkX*SIZE+x; // ChunkX (multiple of 16 for each chunk)
+            int WorldZ = ChunkZ*SIZE+z; // SAME FOR Z
+            int height = GetTerrainHeight(WorldX, WorldZ); // Get terrain configs for each chunk
             for (int y = 0; y<=height; y++){
 
-                if(y == height){
+                if(y == height){ // Setup block levels
                     blocks[GetIndex(x, y, z)] = BlockType::grass;
                 }else{
                 blocks[GetIndex(x, y, z)] = BlockType::dirt;
@@ -36,6 +41,12 @@ Chunk::Chunk(int ChunkX, int ChunkZ) : ChunkX(ChunkX) , ChunkZ(ChunkZ), blocks(S
 
 }
 
+//Get Da World Position for each block outside of local chunk coords.
+glm::ivec3 Chunk::GetBlockWorldPosition(int localX,int localY,int localZ) const{
+    return glm::ivec3(ChunkX * SIZE + localX, localY, ChunkZ * SIZE + localZ);
+}
+
+// Chunk Destructor FREE MEM
 Chunk::~Chunk()
 {
     if (mesh != nullptr)
@@ -45,11 +56,40 @@ Chunk::~Chunk()
     }
 }
 
+//Get Block Actual Postion of each block
 int Chunk::GetIndex(int x, int y, int z) const
 {
     return x + SIZE * (y + SIZE * z);
 }
 
+//Check if HasBlock?
+bool Chunk::HasBlock(int x, int y, int z){
+    if (x < 0 || x >= SIZE ||
+        y < 0 || y >= SIZE ||
+        z < 0 || z >= SIZE)
+    {
+        return false;
+    }
+    return blocks[x + SIZE * (y + SIZE * z)] != BlockType::air;
+}
+
+//Set Block in the arr
+bool Chunk::SetBlock(int x, int y, int z, BlockType type)
+{
+    if (x < 0 || x >= SIZE ||
+        y < 0 || y >= SIZE ||
+        z < 0 || z >= SIZE)
+    {
+        return false;
+    }
+
+    blocks[GetIndex(x, y, z)] = type;
+
+    return true;
+}
+
+
+//Getter for Block
 BlockType Chunk::GetBlock(int x, int y, int z) const
 {
     if (x < 0 || x >= SIZE ||
@@ -62,18 +102,21 @@ BlockType Chunk::GetBlock(int x, int y, int z) const
     return blocks[GetIndex(x, y, z)];
 }
 
+
+//Actually Draw Chunks
 void Chunk::Draw()
 {
     if (mesh != nullptr)
         mesh->Draw();
 }
 
-
+//Generate Mesh combined for all chunks
 void Chunk::GenerateMesh()
 {
+    //Vertices and Indices for mesh loading
     std::vector<float> vertices;
     std::vector<unsigned int> indices;
-
+    //Faces arr for BlockData Strcuture
     const std::array<Faces, 6> faces = {
         Faces::front, Faces::back,
         Faces::left, Faces::right,
@@ -95,7 +138,7 @@ void Chunk::GenerateMesh()
         {1.0f, 1.0f},
         {0.0f, 1.0f}
     }};
-
+    //Loop Through blocks in side a chunk ---> 16 * 16 * 16 = > 16
     for (int x = 0; x < SIZE; ++x)
     {
         for (int y = 0; y < SIZE; ++y)
@@ -108,7 +151,6 @@ void Chunk::GenerateMesh()
                 for (std::size_t f = 0; f < faces.size(); ++f)
                 {
                     const auto& d = directions[f];
-
                     if (GetBlockForMeshing(
                             x + d[0],
                             y + d[1],
@@ -128,6 +170,7 @@ void Chunk::GenerateMesh()
 
                     for (std::size_t v = 0; v < 4; ++v)
                     {
+                        // Calculate all vertices for the mesh drawal.
                         vertices.push_back(face[v][0] + x);
                         vertices.push_back(face[v][1] + y);
                         vertices.push_back(face[v][2] + z);

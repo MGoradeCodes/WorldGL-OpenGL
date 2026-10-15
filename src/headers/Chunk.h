@@ -5,6 +5,7 @@
 #include "array"
 #include <cmath>
 #include "FastNoiseLite.h"
+#include "glm/glm.hpp"
 
 using std::vector;
 using std::array;
@@ -21,6 +22,8 @@ class Chunk{
 
         void GenerateMesh();
         void Draw();
+        bool SetBlock(int x, int y, int z, BlockType type);
+        bool HasBlock(int x, int y, int z);
         void SetNeighbors(
             Chunk* left,
             Chunk* right,
@@ -34,6 +37,11 @@ class Chunk{
         ) const;
         FastNoiseLite terrainNoise;
         int GetTerrainHeight(int x, int z) const;
+        glm::ivec3 GetBlockWorldPosition(
+            int localX,
+            int localY,
+            int localZ
+        ) const;
 
     private:
         vector<BlockType> blocks;

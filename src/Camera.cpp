@@ -1,13 +1,15 @@
-
-#define GLM_ENABLE_EXPERIMENTAL
 #include "headers/Camera.h"
 
-Camera::Camera(int width, int height, glm::vec3 position)
+Camera::Camera(int width, int height, glm::vec3 position, GLFWwindow* window)
 {
     Camera::width = width;
     Camera::height = height;
     Position = position;
-};
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
+    glfwSetWindowUserPointer(window, this);
+    glfwSetCursorPosCallback(window, MouseCallback);
+}
 
 void Camera::Matrix(float FOVdeg, float nearPlane, float farPlane, ShaderProgram& shader, const char* uniform)
 {
@@ -20,61 +22,205 @@ void Camera::Matrix(float FOVdeg, float nearPlane, float farPlane, ShaderProgram
     glUniformMatrix4fv(glGetUniformLocation(shader.ID, uniform), 1, GL_FALSE, glm::value_ptr(projection * view));
 }
 
-
 void Camera::Inputs(GLFWwindow* window)
 {
+    // Movement
+    if (!cursorModeInitialized)
+    {
+        glfwSetWindowUserPointer(window, this);
+        glfwSetCursorPosCallback(window, MouseCallback);
+
+        glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
+        mouseCaptured = true;
+        firstMouse = true;
+        cursorModeInitialized = true;
+    }
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-    {
         Position += speed * front;
-    }
-    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-    {
-        Position += speed * -glm::normalize(glm::cross(front, Up));
-    }
+
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-    {
-        Position += speed * -front;
-    }
+        Position -= speed * front;
+
+    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+        Position -= speed * glm::normalize(glm::cross(front, Up));
+
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-    {
         Position += speed * glm::normalize(glm::cross(front, Up));
+
+    // Initialize pointer lock once.
+    if (!cursorModeInitialized)
+    {
+        glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+        mouseCaptured = true;
+        firstMouse = true;
+        cursorModeInitialized = true;
     }
 
-    if(glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS){
+    // Escape releases the mouse.
+    bool escapeDown =
+        glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS;
 
-        glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
-        if(firstClick){
-            glfwSetCursorPos(window, (width/2), (height/2));
-            firstClick = false;
-        }
-        double mouseX;
-        double mouseY;
+    if (escapeDown && !escapeWasDown)
+    {
+        mouseCaptured = !mouseCaptured;
+
+        glfwSetInputMode(
+            window,
+            GLFW_CURSOR,
+            mouseCaptured
+                ? GLFW_CURSOR_DISABLED
+                : GLFW_CURSOR_NORMAL
+        );
+
+        firstMouse = true;
+    }
+
+    escapeWasDown = escapeDown;
+
+    // F1 also toggles pointer lock.
+    bool toggleDown =
+        glfwGetKey(window, GLFW_KEY_F1) == GLFW_PRESS;
+
+    if (toggleDown && !toggleWasDown)
+    {
+        mouseCaptured = !mouseCaptured;
+
+        glfwSetInputMode(
+            window,
+            GLFW_CURSOR,
+            mouseCaptured
+                ? GLFW_CURSOR_DISABLED
+                : GLFW_CURSOR_NORMAL
+        );
+
+        firstMouse = true;
+    }
+
+    toggleWasDown = toggleDown;
+
+    // Mouse-look only while the cursor is captured.
+    if (mouseCaptured)
+    {
+        double mouseX, mouseY;
         glfwGetCursorPos(window, &mouseX, &mouseY);
 
-        float rotx = sensitivity * (float) (mouseY - (height/2))/height;
-        float roty = sensitivity * (float) (mouseX - (width/2))/width;
+        if (firstMouse)
+        {
+            lastX = mouseX;
+            lastY = mouseY;
+            firstMouse = false;
+        }
 
-        glm::vec3 newOrientation = glm::rotate(front, glm::radians(-rotx), glm::normalize(glm::cross(front, Up)));
-        if (abs(glm::angle(newOrientation, Up) - glm::radians(90.0f)) <= glm::radians(85.0f))
-		{
-			front = newOrientation;
-		}
+        float offsetX = static_cast<float>(mouseX - lastX);
+        float offsetY = static_cast<float>(lastY - mouseY);
 
-        front = glm::rotate(front, glm::radians(-roty), Up);
-        glfwSetCursorPos(window, (width/2), (height/2));
+        lastX = mouseX;
+        lastY = mouseY;
 
+        float rotx = sensitivity * offsetY;
+        float roty = sensitivity * offsetX;
 
+        glm::vec3 right =
+            glm::normalize(glm::cross(front, Up));
+
+        glm::vec3 newFront = glm::normalize(
+            glm::rotate(
+                front,
+                glm::radians(rotx),
+                right
+            )
+        );
+
+        // Prevent looking directly past the vertical limits.
+        float verticalAngle =
+            glm::degrees(glm::angle(newFront, Up));
+
+        if (verticalAngle > 5.0f &&
+            verticalAngle < 175.0f)
+        {
+            front = newFront;
+        }
+
+        front = glm::normalize(
+            glm::rotate(
+                front,
+                glm::radians(-roty),
+                Up
+            )
+        );
     }
-    if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS){
-        glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-        firstClick = true;
-    }
-
 }
 
-float Camera::getPositionX(){
+float Camera::getPositionX() {
     return Position.x;
 }
-float Camera::getPositionZ(){
+
+float Camera::getPositionZ() {
     return Position.z;
+}
+
+glm::vec3 Camera::getCameraPos(){
+    return Position;
+}
+
+glm::vec3 Camera::getCameraDirection(){
+    return front;
+}
+
+void Camera::MouseCallback(
+    GLFWwindow* window,
+    double xpos,
+    double ypos)
+{
+    auto* camera = static_cast<Camera*>(
+        glfwGetWindowUserPointer(window)
+    );
+
+    if (!camera || !camera->mouseCaptured)
+        return;
+
+    if (camera->firstMouse)
+    {
+        camera->lastX = xpos;
+        camera->lastY = ypos;
+        camera->firstMouse = false;
+        return;
+    }
+
+    float offsetX = static_cast<float>(xpos - camera->lastX);
+    float offsetY = static_cast<float>(camera->lastY - ypos);
+
+    camera->lastX = xpos;
+    camera->lastY = ypos;
+
+    float yaw = camera->sensitivity * offsetX;
+    float pitch = camera->sensitivity * offsetY;
+
+    glm::vec3 right = glm::normalize(
+        glm::cross(camera->front, camera->Up)
+    );
+
+    glm::vec3 newFront = glm::normalize(
+        glm::rotate(
+            camera->front,
+            glm::radians(pitch),
+            right
+        )
+    );
+
+    float angle = glm::degrees(
+        glm::angle(newFront, camera->Up)
+    );
+
+    if (angle > 5.0f && angle < 175.0f)
+        camera->front = newFront;
+
+    camera->front = glm::normalize(
+        glm::rotate(
+            camera->front,
+            glm::radians(-yaw),
+            camera->Up
+        )
+    );
 }
