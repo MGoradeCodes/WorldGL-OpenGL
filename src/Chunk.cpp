@@ -33,7 +33,7 @@ Chunk::Chunk(int ChunkX, int ChunkZ) : ChunkX(ChunkX) , ChunkZ(ChunkZ), blocks(S
                 if(y == height){ // Setup block levels
                     blocks[GetIndex(x, y, z)] = BlockType::grass;
                 }else{
-                blocks[GetIndex(x, y, z)] = BlockType::dirt;
+                    blocks[GetIndex(x, y, z)] = BlockType::dirt;
                 }    
             }
         }

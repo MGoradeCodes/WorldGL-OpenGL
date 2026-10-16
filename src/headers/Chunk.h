@@ -6,11 +6,12 @@
 #include <cmath>
 #include "FastNoiseLite.h"
 #include "glm/glm.hpp"
+#include <iostream>
+#include <print> 
 
 using std::vector;
 using std::array;
-using std::sin;
-using std::cos;
+using std::cout;
 
 class Chunk{
     public:

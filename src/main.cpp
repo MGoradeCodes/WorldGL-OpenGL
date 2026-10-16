@@ -216,9 +216,17 @@ int main()
     return 0;
 }
 
-void framebuffer_size_callback(GLFWwindow *window, int width, int height)
+void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
     glViewport(0, 0, width, height);
+
+    // Keep the projection's aspect ratio in sync (skip when minimized: height == 0).
+    auto* camera = static_cast<Camera*>(glfwGetWindowUserPointer(window));
+    if (camera && width > 0 && height > 0)
+    {
+        camera->width  = width;
+        camera->height = height;
+    }
 }
 void setWindowIcon(GLFWwindow* window, const char* filePath) {
     GLFWimage images[1];
